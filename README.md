@@ -1,2 +1,2 @@
 # maritima
-Armeria on steroids
+[Armeria](https://armeria.dev) on steroids

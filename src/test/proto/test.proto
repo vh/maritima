@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_package = "com.github.vh.protobuf";
+option java_outer_classname = "TestProto";
+
+import "google/protobuf/empty.proto";
+
+service TestService {
+    rpc Test(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc Test2(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}

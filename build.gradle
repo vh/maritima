@@ -1,0 +1,144 @@
+buildscript {
+    ext {
+        armeria_version = '1.18.0'
+        guice_version = '5.1.0'
+        protobuf_version = '3.21.5'
+        grpc_version = '1.48.1'
+        jackson_version = '2.13.3'
+        jjwt_version = '0.11.5'
+        junit_version = '5.9.0'
+    }
+}
+
+plugins {
+    id "java-library"
+    id "maven-publish"
+    id "signing"
+    id "com.google.protobuf" version "0.8.19"
+}
+
+group 'com.github.vh'
+version '0.18.0'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+
+    withJavadocJar()
+    withSourcesJar()
+}
+
+dependencies {
+    api("com.linecorp.armeria:armeria:$armeria_version")
+    api("com.linecorp.armeria:armeria-grpc:$armeria_version")
+    api("com.linecorp.armeria:armeria-logback:$armeria_version")
+
+    api("javax.annotation:javax.annotation-api:1.3.2")
+    api("com.google.inject:guice:$guice_version")
+
+    api("io.jsonwebtoken:jjwt-api:$jjwt_version")
+
+    implementation("io.jsonwebtoken:jjwt-impl:$jjwt_version")
+    implementation("io.jsonwebtoken:jjwt-jackson:$jjwt_version")
+
+    implementation("com.google.protobuf:protobuf-java-util:$protobuf_version")
+
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jackson_version")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson_version")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit_version")
+    testImplementation("org.junit.platform:junit-platform-runner:1.9.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit_version")
+}
+
+sourceSets {
+    test {
+        java {
+            srcDir 'build/generated/source/proto/test/grpc'
+            srcDir 'build/generated/source/proto/test/java'
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+
+    filter {
+        includeTestsMatching "com.github.vh.maritima.*"
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:$protobuf_version"
+    }
+
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:$grpc_version"
+        }
+    }
+
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId = 'maritima'
+            from components.java
+
+            pom {
+                name = "Maritima"
+                description = "Armeria on steroids"
+                url = "https://github.com/vh/maritima"
+
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+
+                scm {
+                    connection = "scm:https://github.com/vh/maritima.git"
+                    developerConnection = "scm:git@github.com:vh/maritima.git"
+                    url = "https://github.com/vh/maritima"
+                }
+
+                developers {
+                    developer {
+                        id = "vh"
+                        name = "Vadim Homchik"
+                        email = "homchik@gmail.com"
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            def releasesUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+            url = version.toString().endsWith("SNAPSHOT") ? snapshotsUrl : releasesUrl
+            credentials {
+                username = "$username"
+                password = "$password"
+            }
+        }
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications.maven
+}

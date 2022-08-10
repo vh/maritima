@@ -1,0 +1,11 @@
+type: google.api.Service
+config_version: 3
+name: test
+title: Test APIs
+authentication:
+  rules:
+    - selector: "*"
+      requirements:
+        - provider_id: maritima   # embedded provider
+    - selector: TestService.Test
+      allow_without_credential: true
