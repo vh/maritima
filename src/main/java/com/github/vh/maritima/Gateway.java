@@ -88,7 +88,9 @@ final class Gateway implements DecoratingHttpServiceFunction {
             if (header != null && header.regionMatches(true, 0, BEARER, 0, BEARER.length())) {
                 String token = header.substring(BEARER.length() + 1);
                 try {
-                    claims = Jwts.parser().setSigningKey(Maritima.APP_KEY).parseClaimsJws(token).getBody();
+                    claims = Jwts.parserBuilder().setSigningKey(Maritima.APP_KEY)
+                            .build()
+                            .parseClaimsJws(token).getBody();
                 } catch(Exception e) {
                     logger.warn("Error parsing JWT: token = " + token + ", path = " + req.path(), e);
                 }
