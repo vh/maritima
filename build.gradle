@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        armeria_version = '1.21.0'
+        armeria_version = '1.22.0'
         guice_version = '5.1.0'
         protobuf_version = '3.21.12'
         grpc_version = '1.51.1'
