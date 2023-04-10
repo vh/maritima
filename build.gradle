@@ -1,9 +1,9 @@
 buildscript {
     ext {
-        armeria_version = '1.22.1'
+        armeria_version = '1.23.0'
         guice_version = '5.1.0'
-        protobuf_version = '3.21.12'
-        grpc_version = '1.51.1'
+        protobuf_version = '3.22.2'
+        grpc_version = '1.54.0'
         jackson_version = '2.14.2'
         jjwt_version = '0.11.5'
         junit_version = '5.9.2'
@@ -18,7 +18,7 @@ plugins {
 }
 
 group 'com.github.vh'
-version '0.22.1'
+version '0.23.0'
 
 repositories {
     mavenCentral()
