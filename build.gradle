@@ -1,12 +1,12 @@
 buildscript {
     ext {
-        armeria_version = '1.23.1'
+        armeria_version = '1.24.0'
         guice_version = '5.1.0'
-        protobuf_version = '3.22.2'
-        grpc_version = '1.54.0'
-        jackson_version = '2.14.2'
+        protobuf_version = '3.23.3'
+        grpc_version = '1.56.0'
+        jackson_version = '2.15.2'
         jjwt_version = '0.11.5'
-        junit_version = '5.9.2'
+        junit_version = '5.9.3'
     }
 }
 
@@ -14,11 +14,11 @@ plugins {
     id "java-library"
     id "maven-publish"
     id "signing"
-    id "com.google.protobuf" version "0.9.2"
+    id "com.google.protobuf" version "0.9.3"
 }
 
 group 'com.github.vh'
-version '0.23.1'
+version '0.24.0'
 
 repositories {
     mavenCentral()
@@ -51,7 +51,7 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson_version")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit_version")
-    testImplementation("org.junit.platform:junit-platform-runner:1.9.2")
+    testImplementation("org.junit.platform:junit-platform-runner:1.9.3")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit_version")
 }
 
