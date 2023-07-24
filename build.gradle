@@ -51,7 +51,7 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson_version")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit_version")
-    testImplementation("org.junit.platform:junit-platform-runner:1.9.3")
+    testImplementation("org.junit.platform:junit-platform-runner:1.10.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit_version")
 }
 
