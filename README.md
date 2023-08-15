@@ -8,14 +8,14 @@
     <dependency>
         <groupId>com.github.vh</groupId>
         <artifactId>maritima</artifactId>
-        <version>0.24.0</version>
+        <version>0.24.1</version>
     </dependency>
 </dependencies>
 ```
 
 ### Gradle
 ```groovy
-implementation 'com.github.vh:maritima:0.24.0'
+implementation 'com.github.vh:maritima:0.24.1'
 ```
 
 ## Usage
