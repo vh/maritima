@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        armeria_version = '1.25.0'
+        armeria_version = '1.25.1'
         guice_version = '7.0.0'
         protobuf_version = '3.24.4'
         grpc_version = '1.59.0'
@@ -18,7 +18,7 @@ plugins {
 }
 
 group 'com.github.vh'
-version '0.25.0'
+version '0.25.1'
 
 repositories {
     mavenCentral()
