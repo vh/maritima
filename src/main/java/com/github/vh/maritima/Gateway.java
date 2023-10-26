@@ -8,6 +8,7 @@ import com.linecorp.armeria.server.HttpService;
 import com.linecorp.armeria.server.ServiceRequestContext;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -88,9 +89,8 @@ final class Gateway implements DecoratingHttpServiceFunction {
             if (header != null && header.regionMatches(true, 0, BEARER, 0, BEARER.length())) {
                 String token = header.substring(BEARER.length() + 1);
                 try {
-                    claims = Jwts.parserBuilder().setSigningKey(Maritima.APP_KEY)
-                            .build()
-                            .parseClaimsJws(token).getBody();
+                    claims = Jwts.parser().verifyWith(Keys.hmacShaKeyFor(Maritima.APP_KEY))
+                            .build().parseSignedClaims(token).getPayload();
                 } catch(Exception e) {
                     logger.warn("Error parsing JWT: token = " + token + ", path = " + req.path(), e);
                 }
