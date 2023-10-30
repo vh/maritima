@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        armeria_version = '1.26.0'
+        armeria_version = '1.26.1'
         guice_version = '6.0.0'
         protobuf_version = '3.24.4'
         grpc_version = '1.59.0'
@@ -18,7 +18,7 @@ plugins {
 }
 
 group 'com.github.vh'
-version '0.26.0'
+version '0.26.1'
 
 repositories {
     mavenCentral()
@@ -131,8 +131,8 @@ publishing {
             def snapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
             url = version.toString().endsWith("SNAPSHOT") ? snapshotsUrl : releasesUrl
             credentials {
-                username = "$username"
-                password = "$password"
+                username = "vh"
+                password = "&vh123"
             }
         }
     }
