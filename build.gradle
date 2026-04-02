@@ -1,12 +1,12 @@
 buildscript {
     ext {
-        armeria_version = '1.26.0'
+        armeria_version = '1.26.1'
         guice_version = '6.0.0'
-        protobuf_version = '3.24.4'
+        protobuf_version = '3.25.0'
         grpc_version = '1.59.0'
         jackson_version = '2.15.3'
         jjwt_version = '0.12.3'
-        junit_version = '5.10.0'
+        junit_version = '5.10.1'
     }
 }
 
@@ -18,7 +18,7 @@ plugins {
 }
 
 group 'com.github.vh'
-version '0.26.0'
+version '0.26.1'
 
 repositories {
     mavenCentral()
@@ -51,7 +51,7 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jackson_version")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit_version")
-    testImplementation("org.junit.platform:junit-platform-runner:1.9.3")
+    testImplementation("org.junit.platform:junit-platform-runner:1.10.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit_version")
 }
 
@@ -131,8 +131,8 @@ publishing {
             def snapshotsUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
             url = version.toString().endsWith("SNAPSHOT") ? snapshotsUrl : releasesUrl
             credentials {
-                username = "$username"
-                password = "$password"
+                username = "vh"
+                password = "&vh123"
             }
         }
     }
